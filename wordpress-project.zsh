@@ -58,5 +58,6 @@ function new_wp(){
 	mv starter-theme ../../wp-content/themes/
 
 	popd
+	rm -rf wp-content/plugins/
 	rm -rf tmp
 }
