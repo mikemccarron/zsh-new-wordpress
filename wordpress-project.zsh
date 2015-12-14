@@ -37,9 +37,9 @@ function new_wp(){
 		define('LOGGED_IN_SALT',   '$UNIQUE_PHRASE');
 		define('NONCE_SALT',       '$UNIQUE_PHRASE');
 
-		$table_prefix  = 'wp_';
+		\$table_prefix  = 'wp_';
 
-		define('WP_DEBUG', false);
+		define('WP_DEBUG', true);
 
 		if ( !defined('ABSPATH') )
 			define('ABSPATH', dirname(__FILE__) . '/');
@@ -51,9 +51,12 @@ function new_wp(){
 
 	mkdir -p tmp
 	curl "https://github.com/mikemccarron/Wordpress-Starter-Theme/archive/master.zip" -L -o tmp/basetheme.zip
-	unzip tmp/basetheme.zip
+	pushd tmp
+	unzip basetheme.zip
 
-	# mv tmp/starter-theme wp-content/themes/
+	pushd Wordpress-Starter-Theme-master
+	mv starter-theme ../../wp-content/themes/
 
-	# rm -rf tmp
+	popd
+	rm -rf tmp
 }
