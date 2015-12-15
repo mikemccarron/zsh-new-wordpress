@@ -56,8 +56,9 @@ function new_wp(){
 
 	pushd Wordpress-Starter-Theme-master
 	mv starter-theme ../../wp-content/themes/
-
 	popd
+
+	cd ../
 	rm -rf wp-content/plugins/
 	rm -rf tmp
 }
