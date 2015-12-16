@@ -61,4 +61,5 @@ function new_wp(){
 	cd ../
 	rm -rf wp-content/plugins/
 	rm -rf tmp
+	cd ../
 }
