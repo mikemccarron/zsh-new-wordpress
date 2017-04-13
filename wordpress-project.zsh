@@ -17,7 +17,6 @@ function new_wp(){
 	rm -rf wp-content/themes/twentyfourteen/
 	rm -rf wp-content/themes/twentyfifteen/
 	rm -rf wp-content/themes/twentysixteen/
-	rm -rf wp-content/themes/twentyseventeen/
 
 	UNIQUE_PHRASE="$RANDOM$PROJECT_NAME$RANDOM"
 
@@ -38,9 +37,9 @@ function new_wp(){
 		define('LOGGED_IN_SALT',   '$UNIQUE_PHRASE');
 		define('NONCE_SALT',       '$UNIQUE_PHRASE');
 
-		$table_prefix  = 'wp_';
+		\$table_prefix  = 'wp_';
 
-		define('WP_DEBUG', false);
+		define('WP_DEBUG', true);
 
 		if ( !defined('ABSPATH') )
 			define('ABSPATH', dirname(__FILE__) . '/');
@@ -51,13 +50,16 @@ function new_wp(){
 	rm -rf wp-config-sample.php
 
 	mkdir -p tmp
-	echo 'Extracting theme'
 	curl "https://github.com/mikemccarron/Wordpress-Starter-Theme/archive/master.zip" -L -o tmp/basetheme.zip
-	unzip tmp/basetheme.zip
+	pushd tmp
+	unzip basetheme.zip
 
-	mv Wordpress-Starter-Theme-master/starter-theme wp-content/themes/
+	pushd Wordpress-Starter-Theme-master
+	mv starter-theme ../../wp-content/themes/
+	popd
 
+	cd ../
+	rm -rf wp-content/plugins/
 	rm -rf tmp
-	rm -rf Wordpress-Starter-Theme-master
-	echo 'Congratulation, you’re new Wordpress build has been installed.'
+	cd ../
 }
