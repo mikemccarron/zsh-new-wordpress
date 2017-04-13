@@ -17,6 +17,7 @@ function new_wp(){
 	rm -rf wp-content/themes/twentyfourteen/
 	rm -rf wp-content/themes/twentyfifteen/
 	rm -rf wp-content/themes/twentysixteen/
+	rm -rf wp-content/themes/twentyseventeen/
 
 	UNIQUE_PHRASE="$RANDOM$PROJECT_NAME$RANDOM"
 
@@ -50,10 +51,13 @@ function new_wp(){
 	rm -rf wp-config-sample.php
 
 	mkdir -p tmp
+	echo 'Extracting theme'
 	curl "https://github.com/mikemccarron/Wordpress-Starter-Theme/archive/master.zip" -L -o tmp/basetheme.zip
 	unzip tmp/basetheme.zip
 
-	# mv tmp/starter-theme wp-content/themes/
+	mv Wordpress-Starter-Theme-master/starter-theme wp-content/themes/
 
-	# rm -rf tmp
+	rm -rf tmp
+	rm -rf Wordpress-Starter-Theme-master
+	echo 'Congratulation, you’re new Wordpress build has been installed.'
 }
