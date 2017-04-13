@@ -17,6 +17,7 @@ function new_wp(){
 	rm -rf wp-content/themes/twentyfourteen/
 	rm -rf wp-content/themes/twentyfifteen/
 	rm -rf wp-content/themes/twentysixteen/
+	rm -rf wp-content/themes/twentyseventeen/
 
 	UNIQUE_PHRASE="$RANDOM$PROJECT_NAME$RANDOM"
 
@@ -62,4 +63,5 @@ function new_wp(){
 	rm -rf wp-content/plugins/
 	rm -rf tmp
 	cd ../
+	echo 'Congratulation, you’re new Wordpress build has been installed.'
 }
