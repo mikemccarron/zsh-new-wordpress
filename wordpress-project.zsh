@@ -5,19 +5,19 @@ function new_wp(){
 	read PROJECT_NAME
 	mkdir $PROJECT_NAME && cd $PROJECT_NAME
 
-	mkdir -p tmp
+	mkdir -p tmp dist
 	curl "https://wordpress.org/latest.zip" -L -o tmp/wordpress.zip
 	unzip tmp/wordpress.zip
 
 	pushd wordpress
-	mv * ../
+	mv * ../dist/
 	popd
 	rm -rf wordpress
 	rm -rf tmp
-	rm -rf wp-content/themes/twentyfourteen/
-	rm -rf wp-content/themes/twentyfifteen/
-	rm -rf wp-content/themes/twentysixteen/
-	rm -rf wp-content/themes/twentyseventeen/
+	rm -rf dist/wp-content/themes/twentyfourteen/
+	rm -rf dist/wp-content/themes/twentyfifteen/
+	rm -rf dist/wp-content/themes/twentysixteen/
+	rm -rf dist/wp-content/themes/twentyseventeen/
 
 	RANDOM1="$$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
 	RANDOM2="^$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
@@ -80,9 +80,9 @@ function new_wp(){
 			define('ABSPATH', dirname(__FILE__) . '/');
 
 		require_once(ABSPATH . 'wp-settings.php');
-	?>" > wp-config.php
+	?>" > dist/wp-config.php
 
-	rm -rf wp-config-sample.php
+	rm -rf dist/wp-config-sample.php
 
 	mkdir -p tmp
 	curl "https://github.com/mikemccarron/Wordpress-Starter-Theme/archive/master.zip" -L -o tmp/basetheme.zip
@@ -90,15 +90,16 @@ function new_wp(){
 	unzip basetheme.zip
 
 	pushd Wordpress-Starter-Theme-master
-	mv starter-theme ../../wp-content/themes/$PROJECT_NAME
+	mv starter-theme ../../dist/wp-content/themes/$PROJECT_NAME
 	popd
 
+
 	cd ../
-	rm -rf wp-content/plugins/
 	rm -rf tmp
+	rm -rf dist/wp-content/plugins/
+	mkdir -p dist/wp-content/plugins/
 
-	mkdir -p wp-content/plugins
+	mv dist/wp-content/themes/$PROJECT_NAME/_production prod
 
-	cd ../
-	echo 'Congratulation, you’re new Wordpress build has been installed.'
+	# echo 'Congratulation, you’re new Wordpress build has been installed.'
 }
