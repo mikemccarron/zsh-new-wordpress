@@ -19,34 +19,68 @@ function new_wp(){
 	rm -rf wp-content/themes/twentysixteen/
 	rm -rf wp-content/themes/twentyseventeen/
 
-	UNIQUE_PHRASE="$RANDOM$PROJECT_NAME$RANDOM"
+	RANDOM1="$$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM2="^$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM3="&$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM4="*$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM5="($RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM6=")$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM7="@$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
+	RANDOM8="$$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM";
 
 	echo "<?php
-		define('DB_NAME', '$PROJECT_NAME-wp');
-		define('DB_USER', 'root');
-		define('DB_PASSWORD', 'root');
-		define('DB_HOST', 'localhost');
+		define('WP_SITEURL', 'http://' . \$_SERVER['HTTP_HOST']);
+		define('WP_HOME', 'http://' . \$_SERVER['HTTP_HOST']);
+
+		switch (\$_SERVER['HTTP_HOST']) {
+			case 'local':
+				define('DB_NAME', '');
+				define('DB_USER', 'root');
+				define('DB_PASSWORD', 'root');
+				define('DB_HOST', 'localhost');
+			break;
+
+			case 'dev':
+				define('DB_NAME', '');
+				define('DB_USER', 'root');
+				define('DB_PASSWORD', 'root');
+				define('DB_HOST', 'localhost');
+			break;
+
+			case 'com':
+				define('DB_NAME', '');
+				define('DB_USER', 'root');
+				define('DB_PASSWORD', 'root');
+				define('DB_HOST', 'localhost');
+			break;
+		}
+
 		define('DB_CHARSET', 'utf8');
 		define('DB_COLLATE', '');
 
-		define('AUTH_KEY',         '$UNIQUE_PHRASE');
-		define('SECURE_AUTH_KEY',  '$UNIQUE_PHRASE');
-		define('LOGGED_IN_KEY',    '$UNIQUE_PHRASE');
-		define('NONCE_KEY',        '$UNIQUE_PHRASE');
-		define('AUTH_SALT',        '$UNIQUE_PHRASE');
-		define('SECURE_AUTH_SALT', '$UNIQUE_PHRASE');
-		define('LOGGED_IN_SALT',   '$UNIQUE_PHRASE');
-		define('NONCE_SALT',       '$UNIQUE_PHRASE');
+		define('AUTH_KEY',         '$RANDOM1');
+		define('SECURE_AUTH_KEY',  '$RANDOM2');
+		define('LOGGED_IN_KEY',    '$RANDOM3');
+		define('NONCE_KEY',        '$RANDOM4');
+		define('AUTH_SALT',        '$RANDOM5');
+		define('SECURE_AUTH_SALT', '$RANDOM6');
+		define('LOGGED_IN_SALT',   '$RANDOM7');
+		define('NONCE_SALT',       '$RANDOM8');
 
 		\$table_prefix  = 'wp_';
 
-		define('WP_DEBUG', true);
+		if (isset(\$_GET['debug'])) {
+			define('WP_DEBUG', true);
+		}
+		else{
+			define('WP_DEBUG', false);
+		}
 
 		if ( !defined('ABSPATH') )
 			define('ABSPATH', dirname(__FILE__) . '/');
 
 		require_once(ABSPATH . 'wp-settings.php');
-	" > wp-config.php
+	?>" > wp-config.php
 
 	rm -rf wp-config-sample.php
 
