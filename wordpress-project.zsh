@@ -1,7 +1,7 @@
 # Setup new WordPress project
 
 function new_wp(){
-	echo -e "What is this projects name? \c"
+	echo -e "What is this projects name? (Lowercase, no spaces) \c"
 	read PROJECT_NAME
 	mkdir $PROJECT_NAME && cd $PROJECT_NAME
 
@@ -90,7 +90,7 @@ function new_wp(){
 	unzip basetheme.zip
 
 	pushd Wordpress-Starter-Theme-master
-	mv starter-theme ../../wp-content/themes/
+	mv starter-theme ../../wp-content/themes/$PROJECT_NAME
 	popd
 
 	cd ../
