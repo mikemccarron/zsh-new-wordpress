@@ -96,6 +96,9 @@ function new_wp(){
 	cd ../
 	rm -rf wp-content/plugins/
 	rm -rf tmp
+
+	mkdir -p wp-content/plugins
+
 	cd ../
 	echo 'Congratulation, you’re new Wordpress build has been installed.'
 }
